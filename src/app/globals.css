@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sand-50: #fdf9f3;
+  --color-sand-100: #f8eed9;
+  --color-sand-200: #efd9b0;
+  --color-sand-300: #e3bd80;
+  --color-sand-400: #d4a05b;
+  --color-sand-500: #c2873f;
+  --color-sand-600: #a36b2c;
+  --color-sand-700: #7d5024;
+  --color-sand-800: #543620;
+  --color-sand-900: #321f14;
+
+  --color-clay-50: #fbf3ee;
+  --color-clay-100: #f3dcd0;
+  --color-clay-200: #e5b6a0;
+  --color-clay-300: #d28a6b;
+  --color-clay-400: #bd6443;
+  --color-clay-500: #a14a2c;
+  --color-clay-600: #843822;
+  --color-clay-700: #66291c;
+  --color-clay-800: #441e15;
+  --color-clay-900: #25110b;
+
+  --color-rose-deep: #8a1c1c;
+  --color-rose-deep-dark: #5e0f0f;
+
+  --color-heritage-green: #2f7a44;
+  --color-heritage-green-dark: #1f5a30;
+  --color-heritage-green-light: #6ba47d;
+
+  --color-heritage-gold: #c9963a;
+
+  --color-ink-50: #f6f4f1;
+  --color-ink-100: #e8e3dc;
+  --color-ink-200: #c9c0b3;
+  --color-ink-300: #998b78;
+  --color-ink-400: #6e604f;
+  --color-ink-500: #4a3f33;
+  --color-ink-700: #2a221b;
+  --color-ink-900: #100b07;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-arabic: var(--font-tajawal), "Tajawal", "Cairo", sans-serif;
+  --font-display: var(--font-amiri), "Amiri", serif;
+}
+
+:root {
+  --background: #fdf9f3;
+  --foreground: #2a221b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+html[lang="ar"] body {
+  font-family: var(--font-arabic);
+}
+
+html[dir="rtl"] .ltr-only {
+  display: none;
+}
+html[dir="ltr"] .rtl-only {
+  display: none;
+}
+
+@layer utilities {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .heading-1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-ink-900;
+  }
+  .heading-2 {
+    @apply text-3xl sm:text-4xl font-semibold tracking-tight text-ink-900;
+  }
+  .heading-3 {
+    @apply text-2xl sm:text-3xl font-semibold tracking-tight text-ink-900;
+  }
+  .lead {
+    @apply text-base sm:text-lg text-ink-500 leading-relaxed;
+  }
+  .surface-card {
+    @apply bg-white border border-ink-100 rounded-2xl shadow-sm;
+  }
+  .pattern-bg {
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(161, 74, 44, 0.08) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+}
+
+::selection {
+  background: var(--color-clay-200);
+  color: var(--color-clay-800);
+}

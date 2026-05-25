@@ -1,0 +1,232 @@
+{
+  "site": {
+    "name": "Anamil El Aouras Wa El Zibane",
+    "tagline": "Turning identity into sustainable economic value",
+    "description": "A cultural-economic enterprise valuing the traditional women's costume of Mchounèche (Biskra, Algeria)"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "archive": "Heritage Archive",
+    "shop": "Shop",
+    "story": "The Story of Each Garment",
+    "empowerment": "Women's Empowerment",
+    "tourism": "Cultural Tourism",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Sign In",
+    "admin": "Dashboard"
+  },
+  "common": {
+    "readMore": "Read more",
+    "discover": "Discover",
+    "shopNow": "Shop now",
+    "viewAll": "View all",
+    "loading": "Loading…",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "menu": "Menu",
+    "close": "Close",
+    "language": "Language"
+  },
+  "home": {
+    "heroTitle": "When heritage becomes a sustainable economic value",
+    "heroSubtitle": "A digital archive, an online store, and an interactive space where anthropology meets the creative industries",
+    "ctaDiscover": "Discover the heritage",
+    "ctaShop": "Visit the shop",
+    "pillarsTitle": "Five dimensions, one platform",
+    "pillars": {
+      "archive": { "title": "Digital archive", "desc": "Field-based anthropological documentation of traditional dress" },
+      "shop": { "title": "Online store", "desc": "Heritage and contemporary pieces inspired by identity" },
+      "story": { "title": "Cultural storytelling", "desc": "Every garment is a story, every color a symbol" },
+      "empowerment": { "title": "Artisan empowerment", "desc": "Training, work, and dignity for local women" },
+      "tourism": { "title": "Cultural tourism", "desc": "Visit the workshop, wear the heritage, live the experience" }
+    },
+    "featuredTitle": "Featured pieces",
+    "featuredSubtitle": "From the heritage and contemporary collections",
+    "missionTitle": "Our vision",
+    "missionBody": "We treat the traditional costume as a central element of Algerian cultural identity. Our mission is to document it, protect it from disappearance, and turn it into economic products marketable locally, nationally, and internationally."
+  },
+  "about": {
+    "title": "About us",
+    "intro": "Anamil El Aouras Wa El Zibane is an emerging cultural-economic project that values the traditional women's costume of the Mchounèche region by combining anthropological research with investment in the creative industries.",
+    "visionTitle": "Vision",
+    "visionBody": "Turning the project from a production workshop into a digital cultural-economic platform that combines anthropological archiving, e-commerce, and interactive cultural tourism.",
+    "goalsTitle": "Our goals",
+    "goalsScientific": "Scientific goals",
+    "goalsScientificItems": [
+      "Document the traditional women's costume of Mchounèche through field anthropology",
+      "Analyze the symbolic and social meanings of the garments",
+      "Study the evolution of the costume across generations"
+    ],
+    "goalsCultural": "Economic and cultural goals",
+    "goalsCulturalItems": [
+      "Build a sustainable cultural enterprise",
+      "Value the traditional costume as a cultural and economic product",
+      "Empower local women and artisans",
+      "Contribute to protecting Algerian material heritage"
+    ],
+    "audienceTitle": "Our audience",
+    "audienceItems": [
+      "Algerian women and brides",
+      "Heritage enthusiasts and researchers",
+      "Tourists",
+      "The Algerian diaspora"
+    ]
+  },
+  "archive": {
+    "title": "Anthropological archive",
+    "subtitle": "The scientific dimension of the project — documenting, analyzing, and protecting heritage",
+    "sections": {
+      "timeline": "Costume timeline",
+      "symbols": "Symbolism of colors and motifs",
+      "map": "Interactive map: Aurès–Zibane influence",
+      "interviews": "Interviews with artisans",
+      "gallery": "Documented historical photographs"
+    },
+    "comingSoon": "Coming soon — field content in preparation",
+    "viewItem": "View details"
+  },
+  "shop": {
+    "title": "Shop",
+    "subtitle": "Pieces that combine authenticity with contemporary design",
+    "categories": {
+      "all": "All",
+      "heritage": "Authentic heritage collection",
+      "modern": "Contemporary inspired collection",
+      "accessories": "Accessories and souvenirs"
+    },
+    "filters": "Filters",
+    "sortBy": "Sort by",
+    "newest": "Newest",
+    "priceLowHigh": "Price: low to high",
+    "priceHighLow": "Price: high to low",
+    "addToCart": "Add to cart",
+    "outOfStock": "Out of stock",
+    "story": "The story of this piece",
+    "symbolism": "Symbolism",
+    "sizes": "Sizes",
+    "occasion": "Occasion",
+    "artisanCert": "Artisan certificate",
+    "currency": "DZD"
+  },
+  "story": {
+    "title": "The story of each garment",
+    "subtitle": "Every piece is a narrative: design origin, color symbolism, the occasion, and the artisan's testimony",
+    "origin": "Design origin",
+    "color": "Color symbolism",
+    "occasion": "Associated occasion",
+    "testimony": "Artisan testimony"
+  },
+  "empowerment": {
+    "title": "Women's empowerment",
+    "subtitle": "Work, training, and dignity for local artisans",
+    "artisansTitle": "Our artisans",
+    "trainingTitle": "Training programs",
+    "successTitle": "Success stories",
+    "donateTitle": "Support training",
+    "donateBody": "Help train a new artisan by funding a training program",
+    "donateCta": "Donate now"
+  },
+  "tourism": {
+    "title": "Cultural tourism",
+    "subtitle": "Visit our workshop, wear the heritage, live the experience",
+    "experiences": {
+      "workshop": "Workshop visit",
+      "tryOn": "Try on the traditional costume",
+      "embroidery": "Live embroidery workshops",
+      "photo": "Heritage photo sessions"
+    },
+    "bookTitle": "Book your experience",
+    "form": {
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "experience": "Experience type",
+      "date": "Preferred date",
+      "people": "Number of people",
+      "notes": "Additional notes",
+      "submit": "Send booking request"
+    },
+    "success": "Your request has been received. We will contact you soon."
+  },
+  "blog": {
+    "title": "Research blog",
+    "subtitle": "Anthropological articles and studies on dress and identity",
+    "readingTime": "{minutes} min read",
+    "publishedOn": "Published on",
+    "emptyState": "No articles yet"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "subtitle": "Answers to the most common questions",
+    "items": [
+      { "q": "What is Anamil El Aouras Wa El Zibane?", "a": "A cultural-economic project that documents and markets the traditional women's costume of Mchounèche, via a digital platform combining scientific research and e-commerce." },
+      { "q": "How does shipping work?", "a": "We ship within Algeria through local partners, and internationally via certified postal services. Times and costs are shown at checkout." },
+      { "q": "Are the products authentic?", "a": "Yes, every heritage piece is hand-made by local artisans following traditional methods, with a certificate attached to each item." },
+      { "q": "Can I order a custom size?", "a": "Yes, most products offer custom-size options. Please contact us before ordering to confirm the details." },
+      { "q": "How do I book a workshop visit?", "a": "Through the Cultural Tourism section: pick an experience and a date, then submit your booking request." }
+    ]
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "We'd love to hear from you",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send message"
+    },
+    "info": {
+      "address": "Mchounèche, Biskra, Algeria",
+      "email": "contact@anamil.dz",
+      "phone": "+213 …",
+      "whatsapp": "Contact via WhatsApp"
+    },
+    "success": "Your message has been received. Thank you for reaching out.",
+    "error": "Something went wrong. Please try again."
+  },
+  "auth": {
+    "loginTitle": "Sign in",
+    "loginSubtitle": "Access the admin dashboard",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "wrongCredentials": "Invalid credentials"
+  },
+  "admin": {
+    "title": "Dashboard",
+    "dashboard": "Overview",
+    "products": "Products",
+    "archive": "Archive",
+    "blog": "Posts",
+    "bookings": "Bookings",
+    "messages": "Messages",
+    "artisans": "Artisans",
+    "addNew": "Add new",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirmDelete": "Confirm deletion?"
+  },
+  "footer": {
+    "tagline": "Heritage preserved, dignity empowered, economy built",
+    "explore": "Explore",
+    "company": "Company",
+    "legal": "Legal",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Subscribe for new pieces and articles",
+    "emailPlaceholder": "Your email",
+    "subscribe": "Subscribe",
+    "rights": "All rights reserved",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  }
+}

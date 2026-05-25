@@ -1,0 +1,232 @@
+{
+  "site": {
+    "name": "Anamil El Aouras Wa El Zibane",
+    "tagline": "Transformer l'identité en valeur économique durable",
+    "description": "Entreprise culturelle et économique qui valorise le costume traditionnel féminin de Mchounèche (wilaya de Biskra)"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "archive": "Archive patrimoniale",
+    "shop": "Boutique",
+    "story": "L'histoire de chaque pièce",
+    "empowerment": "Émancipation des femmes",
+    "tourism": "Tourisme culturel",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Connexion",
+    "admin": "Administration"
+  },
+  "common": {
+    "readMore": "Lire la suite",
+    "discover": "Découvrir",
+    "shopNow": "Acheter maintenant",
+    "viewAll": "Tout voir",
+    "loading": "Chargement…",
+    "submit": "Envoyer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "menu": "Menu",
+    "close": "Fermer",
+    "language": "Langue"
+  },
+  "home": {
+    "heroTitle": "Quand le patrimoine devient une valeur économique durable",
+    "heroSubtitle": "Archive numérique, boutique en ligne et espace interactif où l'anthropologie rencontre les industries créatives",
+    "ctaDiscover": "Découvrir le patrimoine",
+    "ctaShop": "Visiter la boutique",
+    "pillarsTitle": "Cinq dimensions, une seule plateforme",
+    "pillars": {
+      "archive": { "title": "Archive numérique", "desc": "Documentation anthropologique de terrain du costume traditionnel" },
+      "shop": { "title": "Boutique en ligne", "desc": "Pièces patrimoniales et contemporaines inspirées de l'identité" },
+      "story": { "title": "Récit culturel", "desc": "Chaque vêtement a une histoire, chaque couleur un symbole" },
+      "empowerment": { "title": "Émancipation des artisanes", "desc": "Formation, emploi et dignité pour les femmes locales" },
+      "tourism": { "title": "Tourisme culturel", "desc": "Visitez l'atelier, portez le patrimoine, vivez l'expérience" }
+    },
+    "featuredTitle": "Pièces sélectionnées",
+    "featuredSubtitle": "De la collection patrimoniale et contemporaine",
+    "missionTitle": "Notre vision",
+    "missionBody": "Nous considérons le costume traditionnel comme un élément central de l'identité culturelle algérienne. Notre mission est de le documenter, le protéger de l'oubli, puis le transformer en produits économiques commercialisables localement, nationalement et internationalement."
+  },
+  "about": {
+    "title": "À propos",
+    "intro": "Anamil El Aouras Wa El Zibane est un projet économique et culturel émergent qui vise à valoriser le costume traditionnel féminin de la région de Mchounèche, en combinant la recherche anthropologique et l'investissement dans les industries créatives.",
+    "visionTitle": "Vision",
+    "visionBody": "Transformer le projet d'un atelier de production en une plateforme culturelle-économique numérique combinant archivage anthropologique, commerce électronique et tourisme culturel interactif.",
+    "goalsTitle": "Nos objectifs",
+    "goalsScientific": "Objectifs scientifiques",
+    "goalsScientificItems": [
+      "Documenter anthropologiquement le costume traditionnel féminin de Mchounèche",
+      "Analyser les significations symboliques et sociales du vêtement",
+      "Étudier l'évolution du costume à travers les générations"
+    ],
+    "goalsCultural": "Objectifs économiques et culturels",
+    "goalsCulturalItems": [
+      "Créer une entreprise culturelle durable",
+      "Valoriser le costume traditionnel comme produit culturel et économique",
+      "Émanciper les femmes locales et les artisanes",
+      "Contribuer à la protection du patrimoine matériel algérien"
+    ],
+    "audienceTitle": "Notre public",
+    "audienceItems": [
+      "Les femmes algériennes et les mariées",
+      "Les passionnés de patrimoine et chercheurs",
+      "Les touristes",
+      "La diaspora algérienne"
+    ]
+  },
+  "archive": {
+    "title": "Archive anthropologique",
+    "subtitle": "La dimension scientifique du projet — documenter, analyser et protéger le patrimoine",
+    "sections": {
+      "timeline": "Chronologie du costume",
+      "symbols": "Symbolique des couleurs et motifs",
+      "map": "Carte interactive : influence Aurès–Zibane",
+      "interviews": "Entretiens avec les artisanes",
+      "gallery": "Photographies historiques"
+    },
+    "comingSoon": "Bientôt — contenu de terrain en préparation",
+    "viewItem": "Voir les détails"
+  },
+  "shop": {
+    "title": "Boutique",
+    "subtitle": "Des pièces qui allient authenticité et design contemporain",
+    "categories": {
+      "all": "Tous",
+      "heritage": "Collection patrimoniale authentique",
+      "modern": "Collection contemporaine inspirée",
+      "accessories": "Accessoires et souvenirs"
+    },
+    "filters": "Filtres",
+    "sortBy": "Trier par",
+    "newest": "Plus récents",
+    "priceLowHigh": "Prix : croissant",
+    "priceHighLow": "Prix : décroissant",
+    "addToCart": "Ajouter au panier",
+    "outOfStock": "En rupture",
+    "story": "L'histoire de cette pièce",
+    "symbolism": "Symbolique",
+    "sizes": "Tailles",
+    "occasion": "Occasion",
+    "artisanCert": "Certificat artisanal",
+    "currency": "DA"
+  },
+  "story": {
+    "title": "L'histoire de chaque pièce",
+    "subtitle": "Chaque vêtement est un récit : origine du design, symbolique de la couleur, occasion, et témoignage de l'artisane",
+    "origin": "Origine du design",
+    "color": "Symbolique de la couleur",
+    "occasion": "Occasion associée",
+    "testimony": "Témoignage d'artisane"
+  },
+  "empowerment": {
+    "title": "Émancipation des femmes",
+    "subtitle": "Travail, formation et dignité pour les artisanes locales",
+    "artisansTitle": "Nos artisanes",
+    "trainingTitle": "Programmes de formation",
+    "successTitle": "Témoignages de réussite",
+    "donateTitle": "Soutenez la formation",
+    "donateBody": "Contribuez à former une nouvelle artisane en finançant un programme de formation",
+    "donateCta": "Faire un don"
+  },
+  "tourism": {
+    "title": "Tourisme culturel",
+    "subtitle": "Visitez notre atelier, portez le patrimoine, vivez l'expérience",
+    "experiences": {
+      "workshop": "Visite de l'atelier",
+      "tryOn": "Essai du costume traditionnel",
+      "embroidery": "Ateliers de broderie en direct",
+      "photo": "Séances photo patrimoniales"
+    },
+    "bookTitle": "Réservez votre expérience",
+    "form": {
+      "name": "Nom complet",
+      "email": "Email",
+      "phone": "Téléphone",
+      "experience": "Type d'expérience",
+      "date": "Date préférée",
+      "people": "Nombre de personnes",
+      "notes": "Notes supplémentaires",
+      "submit": "Envoyer la demande"
+    },
+    "success": "Votre demande a été reçue. Nous vous contacterons bientôt."
+  },
+  "blog": {
+    "title": "Blog de recherche",
+    "subtitle": "Articles anthropologiques et études sur le costume et l'identité",
+    "readingTime": "{minutes} min de lecture",
+    "publishedOn": "Publié le",
+    "emptyState": "Aucun article pour le moment"
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "subtitle": "Réponses aux questions les plus courantes",
+    "items": [
+      { "q": "Qu'est-ce qu'Anamil El Aouras Wa El Zibane ?", "a": "Un projet économique et culturel qui documente et commercialise le costume traditionnel féminin de Mchounèche, via une plateforme numérique combinant recherche scientifique et commerce électronique." },
+      { "q": "Comment se passe la livraison ?", "a": "Nous livrons en Algérie via des partenaires locaux, et à l'international via un service postal certifié. Les délais et coûts s'affichent à la commande." },
+      { "q": "Les produits sont-ils authentiques ?", "a": "Oui, toutes les pièces patrimoniales sont confectionnées à la main par des artisanes locales selon les méthodes traditionnelles, avec un certificat joint à chaque pièce." },
+      { "q": "Puis-je commander une taille personnalisée ?", "a": "Oui, la plupart des produits proposent des options de taille personnalisée. Contactez-nous avant la commande pour confirmer les détails." },
+      { "q": "Comment réserver une visite à l'atelier ?", "a": "Via la section Tourisme culturel du site, choisissez l'expérience et la date, puis envoyez votre demande de réservation." }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Nous aimerions avoir de vos nouvelles",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "subject": "Sujet",
+      "message": "Message",
+      "submit": "Envoyer le message"
+    },
+    "info": {
+      "address": "Mchounèche, wilaya de Biskra, Algérie",
+      "email": "contact@anamil.dz",
+      "phone": "+213 …",
+      "whatsapp": "Contacter via WhatsApp"
+    },
+    "success": "Votre message a été reçu. Merci de nous avoir contactés.",
+    "error": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "auth": {
+    "loginTitle": "Connexion",
+    "loginSubtitle": "Accédez au tableau de bord",
+    "email": "Email",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "signOut": "Déconnexion",
+    "wrongCredentials": "Identifiants incorrects"
+  },
+  "admin": {
+    "title": "Administration",
+    "dashboard": "Tableau de bord",
+    "products": "Produits",
+    "archive": "Archive",
+    "blog": "Articles",
+    "bookings": "Réservations",
+    "messages": "Messages",
+    "artisans": "Artisanes",
+    "addNew": "Ajouter",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "confirmDelete": "Confirmer la suppression ?"
+  },
+  "footer": {
+    "tagline": "Un patrimoine préservé, une dignité émancipée, une économie construite",
+    "explore": "Explorer",
+    "company": "L'entreprise",
+    "legal": "Mentions légales",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Inscrivez-vous pour recevoir nos nouveautés et articles",
+    "emailPlaceholder": "Votre email",
+    "subscribe": "S'inscrire",
+    "rights": "Tous droits réservés",
+    "privacy": "Confidentialité",
+    "terms": "Conditions d'utilisation"
+  }
+}
