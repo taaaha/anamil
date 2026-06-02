@@ -1,9 +1,11 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
-import { Section, SectionHeader } from "@/components/ui/Section";
+import { Section } from "@/components/ui/Section";
+import { PageHero } from "@/components/PageHero";
+import { SmartImage } from "@/components/SmartImage";
 import { listPosts } from "@/lib/data";
 import { Calendar, Clock } from "lucide-react";
-import { archiveImages, productImages, unsplash } from "@/lib/images";
+import { archiveImages, productImages } from "@/lib/images";
 
 const blogCovers = [
   archiveImages.village_textiles,
@@ -35,14 +37,9 @@ export default async function BlogPage({
 
   return (
     <>
-      <Section className="bg-gradient-to-br from-sand-100 to-clay-50 pb-12">
-        <p className="text-sm font-medium uppercase tracking-[0.25em] text-clay-600 mb-3">
-          {t("title")}
-        </p>
-        <h1 className="heading-1 max-w-3xl">{t("subtitle")}</h1>
-      </Section>
+      <PageHero eyebrow={t("title")} title={t("title")} subtitle={t("subtitle")} />
 
-      <Section className="bg-sand-50 !pt-12">
+      <Section className="bg-sand-50">
         {posts.length === 0 ? (
           <p className="text-center text-ink-400 py-12">{t("emptyState")}</p>
         ) : (
@@ -53,14 +50,15 @@ export default async function BlogPage({
                 href={`/${locale}/blog/${post.slug}`}
                 className="group surface-card overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all"
               >
-                <div className="aspect-[16/10] relative overflow-hidden bg-ink-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={unsplash(post.cover_image && post.cover_image.includes("images.unsplash.com") ? post.cover_image : blogCovers[i % blogCovers.length], 800, 500)}
-                    alt={post.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
+                <SmartImage
+                  src={post.cover_image || blogCovers[i % blogCovers.length]}
+                  alt={post.title}
+                  width={800}
+                  height={500}
+                  className="aspect-[16/10] w-full"
+                  imgClassName="group-hover:scale-105 transition-transform duration-500"
+                />
+
                 <div className="p-6">
                   <div className="flex items-center gap-4 text-xs text-ink-400 mb-3">
                     <span className="inline-flex items-center gap-1.5">

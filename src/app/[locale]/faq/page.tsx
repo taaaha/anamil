@@ -25,10 +25,8 @@ export default async function FAQPage({
   return (
     <Section className="bg-sand-50">
       <div className="max-w-3xl mx-auto">
-        <p className="text-sm font-medium uppercase tracking-[0.25em] text-clay-600 mb-3">
-          {t("title")}
-        </p>
-        <h1 className="heading-2 mb-3">{t("subtitle")}</h1>
+        <p className="eyebrow mb-3">{t("title")}</p>
+        <h1 className="heading-2 mb-3">{t("title")}</h1>
         <p className="lead mb-10">{t("subtitle")}</p>
         <FAQAccordion items={items} />
       </div>

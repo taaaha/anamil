@@ -6,7 +6,7 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { getProductBySlug, listProducts } from "@/lib/data";
 import { pickLocale } from "@/lib/supabase/types";
-import { unsplash } from "@/lib/images";
+import { SmartImage } from "@/components/SmartImage";
 import { AddToCart } from "@/components/cart/AddToCart";
 
 export async function generateMetadata({
@@ -67,21 +67,18 @@ export default async function ProductDetail({
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-          <div className={`relative aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br ${categoryGradient[product.category]}`}>
-            {product.images && product.images.length > 0 ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={product.images[0].includes("images.unsplash.com") ? unsplash(product.images[0], 1200, 1500) : product.images[0]}
-                alt={title}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-white/70 font-display text-9xl select-none">
-                أ
-              </div>
-            )}
+          <div className="relative">
+            <SmartImage
+              src={product.images?.[0]}
+              alt={title}
+              width={1200}
+              height={1500}
+              priority
+              className="aspect-[4/5] w-full rounded-3xl"
+              fallbackClassName={categoryGradient[product.category]}
+            />
             {product.featured && (
-              <span className="absolute top-4 start-4 inline-flex items-center gap-1.5 bg-white/95 text-clay-700 text-xs font-semibold px-3 py-1.5 rounded-full">
+              <span className="absolute top-4 start-4 z-10 inline-flex items-center gap-1.5 bg-white/95 text-clay-700 text-xs font-semibold px-3 py-1.5 rounded-full">
                 <Sparkles className="size-3" />
                 {locale === "ar" ? "مميز" : locale === "fr" ? "Pièce vedette" : "Featured"}
               </span>
@@ -179,20 +176,14 @@ export default async function ProductDetail({
                 href={`/${locale}/shop/${p.slug}`}
                 className="surface-card overflow-hidden hover:shadow-md transition-shadow"
               >
-                <div
-                  className={`aspect-[4/5] relative overflow-hidden bg-gradient-to-br ${categoryGradient[p.category]} flex items-center justify-center`}
-                >
-                  {p.images && p.images[0] ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      src={p.images[0].includes("images.unsplash.com") ? unsplash(p.images[0], 600, 750) : p.images[0]}
-                      alt={pickLocale(p.title, locale)}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  ) : (
-                    <span className="font-display text-5xl text-white/70">أ</span>
-                  )}
-                </div>
+                <SmartImage
+                  src={p.images?.[0]}
+                  alt={pickLocale(p.title, locale)}
+                  width={600}
+                  height={750}
+                  className="aspect-[4/5] w-full"
+                  fallbackClassName={categoryGradient[p.category]}
+                />
                 <div className="p-4">
                   <h4 className="font-semibold text-ink-900 line-clamp-1">
                     {pickLocale(p.title, locale)}

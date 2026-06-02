@@ -2,9 +2,11 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { ArrowRight, Quote } from "lucide-react";
 import { Section } from "@/components/ui/Section";
+import { PageHero } from "@/components/PageHero";
+import { SmartImage } from "@/components/SmartImage";
 import { listProducts } from "@/lib/data";
 import { pickLocale } from "@/lib/supabase/types";
-import { unsplash } from "@/lib/images";
+import { heroImages } from "@/lib/images";
 
 export async function generateMetadata({
   params,
@@ -34,14 +36,15 @@ export default async function StoryPage({
 
   return (
     <>
-      <Section className="bg-gradient-to-br from-sand-100 via-sand-50 to-clay-50 pb-12">
-        <p className="text-sm font-medium uppercase tracking-[0.25em] text-clay-600 mb-3">
-          {t("title")}
-        </p>
-        <h1 className="heading-1 max-w-3xl">{t("subtitle")}</h1>
-      </Section>
+      <PageHero
+        eyebrow={t("title")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        image={heroImages.portrait}
+        mode="image"
+      />
 
-      <Section className="bg-sand-50 !pt-12">
+      <Section className="bg-sand-50">
         <div className="space-y-16">
           {products.map((p, idx) => {
             const title = pickLocale(p.title, locale);
@@ -55,20 +58,14 @@ export default async function StoryPage({
                 className={`grid lg:grid-cols-12 gap-8 lg:gap-12 items-center ${flip ? "lg:[&>div:first-child]:order-2" : ""}`}
               >
                 <div className="lg:col-span-5">
-                  <div
-                    className={`aspect-[4/5] rounded-3xl overflow-hidden relative bg-gradient-to-br ${blockGradients[idx % blockGradients.length]} flex items-center justify-center shadow-sm`}
-                  >
-                    {p.images && p.images[0] ? (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
-                        src={p.images[0].includes("images.unsplash.com") ? unsplash(p.images[0], 900, 1125) : p.images[0]}
-                        alt={title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                    ) : (
-                      <span className="font-display text-7xl text-white/70">أ</span>
-                    )}
-                  </div>
+                  <SmartImage
+                    src={p.images?.[0]}
+                    alt={title}
+                    width={900}
+                    height={1125}
+                    className="aspect-[4/5] w-full rounded-3xl shadow-sm"
+                    fallbackClassName={blockGradients[idx % blockGradients.length]}
+                  />
                 </div>
                 <div className="lg:col-span-7">
                   <p className="text-xs font-semibold uppercase tracking-[0.25em] text-clay-500 mb-3">

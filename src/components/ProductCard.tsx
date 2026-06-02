@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import type { Product } from "@/lib/supabase/types";
 import { pickLocale } from "@/lib/supabase/types";
-import { unsplash } from "@/lib/images";
+import { SmartImage } from "./SmartImage";
 import { cn } from "@/lib/cn";
 
 function formatPrice(value: number, locale: string) {
@@ -11,8 +11,6 @@ function formatPrice(value: number, locale: string) {
     { maximumFractionDigits: 0 }
   ).format(value);
 }
-
-const isUnsplash = (url: string) => url.includes("images.unsplash.com");
 
 const categoryGradient: Record<string, string> = {
   heritage: "from-rose-deep via-clay-500 to-sand-400",
@@ -31,45 +29,32 @@ export function ProductCard({
   const t = useTranslations("shop");
   const title = pickLocale(product.title, locale);
   const desc = pickLocale(product.short_description, locale);
-  const cover = product.images?.[0];
-  const src = cover && isUnsplash(cover) ? unsplash(cover, 800, 1000) : cover;
 
   return (
-    <Link
-      href={`/${locale}/shop/${product.slug}`}
-      className={cn("group block", className)}
-    >
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-ink-100">
-        {src ? (
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt={title}
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-900/50 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-          </>
-        ) : (
-          <div
-            className={cn(
-              "absolute inset-0 bg-gradient-to-br flex items-center justify-center",
-              categoryGradient[product.category] ?? "from-clay-400 to-sand-300"
-            )}
-          >
-            <span className="font-display text-5xl text-white/70">أ</span>
-          </div>
-        )}
+    <Link href={`/${locale}/shop/${product.slug}`} className={cn("group block", className)}>
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+        <SmartImage
+          src={product.images?.[0]}
+          alt={title}
+          width={800}
+          height={1000}
+          className="absolute inset-0 w-full h-full"
+          imgClassName="group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+          fallbackClassName={categoryGradient[product.category] ?? "from-clay-400 to-sand-300"}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-900/55 via-transparent to-transparent pointer-events-none" />
 
-        {/* category tag */}
-        <span className="absolute top-3 start-3 text-[0.7rem] font-medium uppercase tracking-wider text-sand-50/90 bg-ink-900/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
+        <span className="absolute top-3 start-3 text-[0.7rem] font-medium uppercase tracking-wider text-sand-50/95 bg-ink-900/35 backdrop-blur-sm px-2.5 py-1 rounded-full">
           {t(`categories.${product.category}`)}
         </span>
+        {!product.in_stock && (
+          <span className="absolute top-3 end-3 text-[0.7rem] font-semibold text-white bg-rose-deep/90 px-2.5 py-1 rounded-full">
+            {t("outOfStock")}
+          </span>
+        )}
 
-        {/* price chip on image */}
         <div className="absolute bottom-3 start-3 end-3 flex items-end justify-between gap-2">
-          <span className="text-sand-50 font-semibold text-lg drop-shadow">
+          <span className="text-sand-50 font-semibold text-lg drop-shadow-md">
             {formatPrice(product.price_dzd, locale)}
             <span className="text-xs font-normal opacity-80"> {t("currency")}</span>
           </span>

@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Section } from "@/components/ui/Section";
+import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "./ContactForm";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 
@@ -24,14 +25,9 @@ export default async function ContactPage({
 
   return (
     <>
-      <Section className="bg-gradient-to-br from-sand-100 to-clay-50 pb-10">
-        <p className="text-sm font-medium uppercase tracking-[0.25em] text-clay-600 mb-3">
-          {t("title")}
-        </p>
-        <h1 className="heading-1 max-w-3xl">{t("subtitle")}</h1>
-      </Section>
+      <PageHero eyebrow={t("title")} title={t("title")} subtitle={t("subtitle")} />
 
-      <Section className="bg-sand-50 !pt-12">
+      <Section className="bg-sand-50">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <ContactForm />
