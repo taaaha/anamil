@@ -72,6 +72,14 @@ html[dir="ltr"] .rtl-only {
   display: none;
 }
 
+/* surface-card lives in the components layer so any bg-* utility added
+   alongside it (e.g. bg-ink-900) always overrides its default white. */
+@layer components {
+  .surface-card {
+    @apply bg-white border border-ink-100 rounded-2xl shadow-sm;
+  }
+}
+
 @layer utilities {
   .container-page {
     @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
@@ -93,9 +101,6 @@ html[dir="ltr"] .rtl-only {
   }
   .eyebrow {
     @apply inline-flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.25em] text-clay-600;
-  }
-  .surface-card {
-    @apply bg-white border border-ink-100 rounded-2xl shadow-sm;
   }
   .pattern-bg {
     background-image:
