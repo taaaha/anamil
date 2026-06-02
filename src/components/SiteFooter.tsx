@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { BerberBand } from "./patterns/Berber";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -43,8 +44,10 @@ export function SiteFooter() {
   ] as const;
 
   return (
-    <footer className="bg-ink-900 text-sand-100 pt-16 pb-8 mt-12">
-      <div className="container-page grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-ink-900 text-sand-100 pb-8">
+      <BerberBand className="h-6 w-full text-clay-500/40" />
+      <div className="container-page grid gap-12 md:grid-cols-2 lg:grid-cols-4 pt-16">
+
         <div className="space-y-5 lg:col-span-1">
           <Logo variant="footer" />
           <p className="text-sm text-sand-200/80 leading-relaxed max-w-xs">

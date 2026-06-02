@@ -193,11 +193,21 @@
   },
   "auth": {
     "loginTitle": "تسجيل الدخول",
-    "loginSubtitle": "للوصول إلى لوحة التحكم",
+    "loginSubtitle": "ادخل إلى حسابك أو أنشئ حسابًا جديدًا",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
     "signIn": "دخول",
+    "signUp": "إنشاء حساب",
     "signOut": "خروج",
+    "loginTab": "تسجيل الدخول",
+    "signupTab": "حساب جديد",
+    "noAccount": "ليس لديك حساب؟",
+    "haveAccount": "لديك حساب بالفعل؟",
+    "account": "حسابي",
+    "accountTitle": "حسابي",
+    "myBookings": "حجوزاتي",
+    "adminPanel": "لوحة التحكم",
+    "loggedInAs": "مسجّل الدخول باسم",
     "wrongCredentials": "بيانات اعتماد غير صحيحة"
   },
   "admin": {

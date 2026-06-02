@@ -193,11 +193,21 @@
   },
   "auth": {
     "loginTitle": "Connexion",
-    "loginSubtitle": "Accédez au tableau de bord",
+    "loginSubtitle": "Connectez-vous ou créez un compte",
     "email": "Email",
     "password": "Mot de passe",
     "signIn": "Se connecter",
+    "signUp": "Créer un compte",
     "signOut": "Déconnexion",
+    "loginTab": "Connexion",
+    "signupTab": "Nouveau compte",
+    "noAccount": "Pas encore de compte ?",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "account": "Mon compte",
+    "accountTitle": "Mon compte",
+    "myBookings": "Mes réservations",
+    "adminPanel": "Administration",
+    "loggedInAs": "Connecté en tant que",
     "wrongCredentials": "Identifiants incorrects"
   },
   "admin": {

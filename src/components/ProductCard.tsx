@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { Sparkles } from "lucide-react";
 import type { Product } from "@/lib/supabase/types";
 import { pickLocale } from "@/lib/supabase/types";
 import { unsplash } from "@/lib/images";
@@ -13,9 +12,7 @@ function formatPrice(value: number, locale: string) {
   ).format(value);
 }
 
-function isUnsplashUrl(url: string) {
-  return url.includes("images.unsplash.com");
-}
+const isUnsplash = (url: string) => url.includes("images.unsplash.com");
 
 const categoryGradient: Record<string, string> = {
   heritage: "from-rose-deep via-clay-500 to-sand-400",
@@ -35,17 +32,14 @@ export function ProductCard({
   const title = pickLocale(product.title, locale);
   const desc = pickLocale(product.short_description, locale);
   const cover = product.images?.[0];
-  const src = cover && isUnsplashUrl(cover) ? unsplash(cover, 800, 1000) : cover;
+  const src = cover && isUnsplash(cover) ? unsplash(cover, 800, 1000) : cover;
 
   return (
     <Link
       href={`/${locale}/shop/${product.slug}`}
-      className={cn(
-        "group surface-card overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5",
-        className
-      )}
+      className={cn("group block", className)}
     >
-      <div className="aspect-[4/5] relative overflow-hidden bg-ink-100">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-ink-100">
         {src ? (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -53,9 +47,9 @@ export function ProductCard({
               src={src}
               alt={title}
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-900/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-900/50 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
           </>
         ) : (
           <div
@@ -64,33 +58,32 @@ export function ProductCard({
               categoryGradient[product.category] ?? "from-clay-400 to-sand-300"
             )}
           >
-            <span className="font-display text-5xl text-white/70 select-none">أ</span>
+            <span className="font-display text-5xl text-white/70">أ</span>
           </div>
         )}
-        {product.featured && (
-          <span className="absolute top-3 start-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-clay-700 text-xs font-medium px-2.5 py-1 rounded-full shadow-sm">
-            <Sparkles className="size-3" />
-            {locale === "ar" ? "مميز" : locale === "fr" ? "Vedette" : "Featured"}
-          </span>
-        )}
-      </div>
-      <div className="p-5">
-        <p className="text-xs font-medium uppercase tracking-wider text-clay-500 mb-1.5">
+
+        {/* category tag */}
+        <span className="absolute top-3 start-3 text-[0.7rem] font-medium uppercase tracking-wider text-sand-50/90 bg-ink-900/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
           {t(`categories.${product.category}`)}
-        </p>
-        <h3 className="font-semibold text-ink-900 leading-tight line-clamp-2">
-          {title}
-        </h3>
-        <p className="mt-1.5 text-sm text-ink-400 line-clamp-2">{desc}</p>
-        <div className="mt-4 flex items-baseline justify-between">
-          <span className="text-lg font-semibold text-clay-600">
-            {formatPrice(product.price_dzd, locale)}{" "}
-            <span className="text-sm font-normal text-ink-400">{t("currency")}</span>
+        </span>
+
+        {/* price chip on image */}
+        <div className="absolute bottom-3 start-3 end-3 flex items-end justify-between gap-2">
+          <span className="text-sand-50 font-semibold text-lg drop-shadow">
+            {formatPrice(product.price_dzd, locale)}
+            <span className="text-xs font-normal opacity-80"> {t("currency")}</span>
           </span>
-          <span className="text-xs text-ink-300 group-hover:text-clay-500 transition-colors">
-            →
+          <span className="size-9 rounded-full bg-sand-50 text-clay-700 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all">
+            <span className="rtl:rotate-180">→</span>
           </span>
         </div>
+      </div>
+
+      <div className="pt-4">
+        <h3 className="font-semibold text-ink-900 leading-snug group-hover:text-clay-700 transition-colors line-clamp-1">
+          {title}
+        </h3>
+        <p className="mt-1 text-sm text-ink-400 line-clamp-2">{desc}</p>
       </div>
     </Link>
   );

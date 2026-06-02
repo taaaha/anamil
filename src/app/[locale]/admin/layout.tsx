@@ -11,7 +11,8 @@ import {
   Users,
   LogOut,
 } from "lucide-react";
-import { createSupabaseServerClient, hasSupabaseEnv } from "@/lib/supabase/server";
+import { hasSupabaseEnv } from "@/lib/supabase/server";
+import { getCurrentUser, isAdminEmail } from "@/lib/auth";
 import { signOut } from "../login/actions";
 
 const navItems = [
@@ -54,9 +55,9 @@ export default async function AdminLayout({
     );
   }
 
-  const supabase = await createSupabaseServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
   if (!user) redirect(`/${locale}/login`);
+  if (!isAdminEmail(user.email)) redirect(`/${locale}/account`);
 
   const t = await getTranslations("admin");
 

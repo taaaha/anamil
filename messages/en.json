@@ -193,11 +193,21 @@
   },
   "auth": {
     "loginTitle": "Sign in",
-    "loginSubtitle": "Access the admin dashboard",
+    "loginSubtitle": "Sign in or create an account",
     "email": "Email",
     "password": "Password",
     "signIn": "Sign in",
+    "signUp": "Create account",
     "signOut": "Sign out",
+    "loginTab": "Sign in",
+    "signupTab": "New account",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "account": "My account",
+    "accountTitle": "My account",
+    "myBookings": "My bookings",
+    "adminPanel": "Dashboard",
+    "loggedInAs": "Signed in as",
     "wrongCredentials": "Invalid credentials"
   },
   "admin": {

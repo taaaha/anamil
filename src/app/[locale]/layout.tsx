@@ -6,6 +6,7 @@ import { Inter, Tajawal, Amiri } from "next/font/google";
 import { routing, localeDirs, type Locale } from "@/i18n/routing";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { getCurrentUser, isAdminEmail } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const tajawal = Tajawal({
@@ -63,6 +64,11 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   const dir = localeDirs[locale as Locale];
 
+  const user = await getCurrentUser();
+  const auth = user
+    ? { email: user.email ?? "", isAdmin: isAdminEmail(user.email) }
+    : null;
+
   return (
     <html
       lang={locale}
@@ -71,7 +77,7 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col bg-sand-50 text-ink-900">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <SiteHeader />
+          <SiteHeader auth={auth} />
           <main className="flex-1">{children}</main>
           <SiteFooter />
         </NextIntlClientProvider>
