@@ -6,6 +6,8 @@ import { Inter, Tajawal, Amiri } from "next/font/google";
 import { routing, localeDirs, type Locale } from "@/i18n/routing";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CartProvider } from "@/components/cart/CartProvider";
+import { CartDrawer } from "@/components/cart/CartDrawer";
 import { getCurrentUser, isAdminEmail } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -77,9 +79,12 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col bg-sand-50 text-ink-900">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <SiteHeader auth={auth} />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
+          <CartProvider>
+            <SiteHeader auth={auth} />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+            <CartDrawer />
+          </CartProvider>
         </NextIntlClientProvider>
       </body>
     </html>

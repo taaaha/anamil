@@ -214,6 +214,7 @@
     "title": "Administration",
     "dashboard": "Tableau de bord",
     "products": "Produits",
+    "orders": "Commandes",
     "archive": "Archive",
     "blog": "Articles",
     "bookings": "Réservations",
@@ -224,7 +225,58 @@
     "delete": "Supprimer",
     "save": "Enregistrer",
     "cancel": "Annuler",
-    "confirmDelete": "Confirmer la suppression ?"
+    "confirmDelete": "Confirmer ?",
+    "newBadge": "nouveau",
+    "status": "Statut",
+    "customer": "Client",
+    "date": "Date",
+    "items": "Articles",
+    "markRead": "Marquer comme lu",
+    "noData": "Aucune donnée pour le moment"
+  },
+  "cart": {
+    "title": "Panier",
+    "empty": "Votre panier est vide",
+    "emptyCta": "Parcourir la boutique",
+    "subtotal": "Sous-total",
+    "total": "Total",
+    "checkout": "Commander",
+    "continue": "Continuer mes achats",
+    "remove": "Retirer",
+    "qty": "Quantité",
+    "size": "Taille",
+    "added": "Ajouté au panier",
+    "items": "articles"
+  },
+  "checkout": {
+    "title": "Finaliser la commande",
+    "subtitle": "Renseignez vos coordonnées — paiement à la livraison, nous vous contacterons pour confirmer",
+    "summary": "Résumé de la commande",
+    "shippingInfo": "Informations de livraison",
+    "name": "Nom complet",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "city": "Ville / Wilaya",
+    "notes": "Notes (facultatif)",
+    "placeOrder": "Confirmer la commande",
+    "noPayment": "Aucun paiement maintenant — paiement à la livraison. Nous vous appellerons pour confirmer.",
+    "successTitle": "Commande reçue !",
+    "successBody": "Merci. Nous vous contacterons bientôt pour confirmer et organiser la livraison.",
+    "orderNumber": "Numéro de commande",
+    "viewOrders": "Voir mes commandes",
+    "emptyRedirect": "Votre panier est vide"
+  },
+  "orders": {
+    "title": "Mes commandes",
+    "empty": "Aucune commande pour le moment",
+    "status": {
+      "new": "Nouvelle",
+      "confirmed": "Confirmée",
+      "shipped": "Expédiée",
+      "delivered": "Livrée",
+      "cancelled": "Annulée"
+    }
   },
   "footer": {
     "tagline": "Un patrimoine préservé, une dignité émancipée, une économie construite",

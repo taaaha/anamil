@@ -24,3 +24,15 @@ export function isAdminEmail(email: string | null | undefined): boolean {
   if (list.length === 0) return true;
   return list.includes(email.toLowerCase());
 }
+
+/**
+ * Guard for admin server actions. Throws if the caller isn't an admin.
+ * Call at the top of every mutating admin action before touching the DB.
+ */
+export async function requireAdmin() {
+  const user = await getCurrentUser();
+  if (!user || !isAdminEmail(user.email)) {
+    throw new Error("Unauthorized");
+  }
+  return user;
+}

@@ -8,6 +8,7 @@ import { Menu, X, ShoppingBag, User, LayoutDashboard, Globe } from "lucide-react
 import { Logo } from "./Logo";
 import { Button } from "./ui/Button";
 import { BerberRule } from "./patterns/Berber";
+import { useCart } from "./cart/CartProvider";
 import { localeLabels, routing, type Locale } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 
@@ -27,9 +28,11 @@ export function SiteHeader({ auth }: { auth: Auth }) {
   const t = useTranslations("nav");
   const tAuth = useTranslations("auth");
   const tCommon = useTranslations("common");
+  const tCart = useTranslations("cart");
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const router = useRouter();
+  const { count, setOpen: setCartOpen } = useCart();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -117,24 +120,22 @@ export function SiteHeader({ auth }: { auth: Auth }) {
               {tAuth("signIn")}
             </Link>
           )}
-          <Link href={`/${locale}/shop`}>
-            <Button variant="primary" size="sm">
-              <ShoppingBag className="size-4" />
-              {t("shop")}
-            </Button>
-          </Link>
+          <CartButton count={count} onClick={() => setCartOpen(true)} label={tCart("title")} />
         </div>
 
-        {/* Mobile trigger */}
-        <button
-          type="button"
-          className="lg:hidden -me-2 p-2.5 rounded-xl text-ink-800 hover:bg-ink-100 transition-colors"
-          aria-label={open ? tAuth("signOut") : "menu"}
-          aria-expanded={open}
-          onClick={() => setOpen(true)}
-        >
-          <Menu className="size-6" />
-        </button>
+        {/* Mobile right cluster */}
+        <div className="flex items-center gap-1 lg:hidden">
+          <CartButton count={count} onClick={() => setCartOpen(true)} label={tCart("title")} />
+          <button
+            type="button"
+            className="-me-1 p-2.5 rounded-xl text-ink-800 hover:bg-ink-100 transition-colors"
+            aria-label="menu"
+            aria-expanded={open}
+            onClick={() => setOpen(true)}
+          >
+            <Menu className="size-6" />
+          </button>
+        </div>
       </div>
 
       {/* ─── Mobile full-screen drawer ─────────────────────── */}
@@ -260,6 +261,32 @@ export function SiteHeader({ auth }: { auth: Auth }) {
         </div>
       </div>
     </header>
+  );
+}
+
+function CartButton({
+  count,
+  onClick,
+  label,
+}: {
+  count: number;
+  onClick: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      className="relative p-2.5 rounded-xl text-ink-800 hover:bg-ink-100 transition-colors"
+    >
+      <ShoppingBag className="size-5" />
+      {count > 0 && (
+        <span className="absolute -top-0.5 -end-0.5 min-w-[1.15rem] h-[1.15rem] px-1 rounded-full bg-clay-600 text-white text-[0.7rem] font-semibold flex items-center justify-center tabular-nums">
+          {count > 99 ? "99+" : count}
+        </span>
+      )}
+    </button>
   );
 }
 

@@ -214,6 +214,7 @@
     "title": "Dashboard",
     "dashboard": "Overview",
     "products": "Products",
+    "orders": "Orders",
     "archive": "Archive",
     "blog": "Posts",
     "bookings": "Bookings",
@@ -224,7 +225,58 @@
     "delete": "Delete",
     "save": "Save",
     "cancel": "Cancel",
-    "confirmDelete": "Confirm deletion?"
+    "confirmDelete": "Confirm?",
+    "newBadge": "new",
+    "status": "Status",
+    "customer": "Customer",
+    "date": "Date",
+    "items": "Items",
+    "markRead": "Mark as read",
+    "noData": "No data yet"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "emptyCta": "Browse the shop",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continue": "Continue shopping",
+    "remove": "Remove",
+    "qty": "Qty",
+    "size": "Size",
+    "added": "Added to cart",
+    "items": "items"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "subtitle": "Enter your details — pay on delivery, we'll contact you to confirm",
+    "summary": "Order summary",
+    "shippingInfo": "Shipping information",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City / Wilaya",
+    "notes": "Notes (optional)",
+    "placeOrder": "Place order",
+    "noPayment": "No payment now — pay on delivery. We'll call you to confirm the details.",
+    "successTitle": "Order received!",
+    "successBody": "Thank you. We'll contact you soon to confirm and arrange delivery.",
+    "orderNumber": "Order number",
+    "viewOrders": "View my orders",
+    "emptyRedirect": "Your cart is empty"
+  },
+  "orders": {
+    "title": "My orders",
+    "empty": "No orders yet",
+    "status": {
+      "new": "New",
+      "confirmed": "Confirmed",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    }
   },
   "footer": {
     "tagline": "Heritage preserved, dignity empowered, economy built",

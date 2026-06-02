@@ -3,11 +3,11 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
-import { LayoutDashboard, CalendarCheck, LogOut, User } from "lucide-react";
+import { LayoutDashboard, CalendarCheck, LogOut, User, Package } from "lucide-react";
 import { getCurrentUser, isAdminEmail } from "@/lib/auth";
 import { createSupabaseServerClient, hasSupabaseEnv } from "@/lib/supabase/server";
 import { signOut } from "../login/actions";
-import type { TourismBooking } from "@/lib/supabase/types";
+import type { TourismBooking, Order } from "@/lib/supabase/types";
 
 export async function generateMetadata({
   params,
@@ -33,17 +33,29 @@ export default async function AccountPage({
   const t = await getTranslations("auth");
   const admin = isAdminEmail(user.email);
 
-  // Pull this user's bookings (matched by email).
+  // Pull this user's bookings + orders (matched by email).
   let bookings: TourismBooking[] = [];
+  let orders: Order[] = [];
   if (hasSupabaseEnv() && user.email) {
     const supabase = await createSupabaseServerClient();
-    const { data } = await supabase
-      .from("tourism_bookings")
-      .select("*")
-      .eq("email", user.email)
-      .order("created_at", { ascending: false });
-    bookings = (data as TourismBooking[]) ?? [];
+    const [bRes, oRes] = await Promise.all([
+      supabase
+        .from("tourism_bookings")
+        .select("*")
+        .eq("email", user.email)
+        .order("created_at", { ascending: false }),
+      supabase
+        .from("orders")
+        .select("*")
+        .eq("customer_email", user.email)
+        .order("created_at", { ascending: false }),
+    ]);
+    bookings = (bRes.data as TourismBooking[]) ?? [];
+    orders = (oRes.data as Order[]) ?? [];
   }
+
+  const tOrders = await getTranslations("orders");
+  const tShop = await getTranslations("shop");
 
   return (
     <Section className="bg-sand-50 min-h-[60vh]">
@@ -92,6 +104,39 @@ export default async function AccountPage({
           </Link>
         )}
 
+        {/* Orders */}
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-clay-600 mb-4 flex items-center gap-2">
+          <Package className="size-4" />
+          {tOrders("title")}
+        </h2>
+        {orders.length === 0 ? (
+          <div className="surface-card p-8 text-center text-ink-400 mb-10">
+            {tOrders("empty")}
+          </div>
+        ) : (
+          <ul className="space-y-3 mb-10">
+            {orders.map((o) => (
+              <li key={o.id} className="surface-card p-5">
+                <div className="flex items-center justify-between gap-4 mb-2">
+                  <span className="font-mono text-xs text-ink-400">
+                    #{o.id.slice(0, 8).toUpperCase()}
+                  </span>
+                  <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-clay-50 text-clay-700">
+                    {tOrders(`status.${o.status}`)}
+                  </span>
+                </div>
+                <p className="text-sm text-ink-600">
+                  {o.items.map((it) => `${it.title} ×${it.qty}`).join("، ")}
+                </p>
+                <p className="text-sm font-semibold text-clay-600 mt-2">
+                  {new Intl.NumberFormat(locale).format(o.total_dzd)} {tShop("currency")}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Bookings */}
         <h2 className="text-sm font-semibold uppercase tracking-wider text-clay-600 mb-4 flex items-center gap-2">
           <CalendarCheck className="size-4" />
           {t("myBookings")}

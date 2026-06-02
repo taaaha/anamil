@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { getProductBySlug, listProducts } from "@/lib/data";
 import { pickLocale } from "@/lib/supabase/types";
 import { unsplash } from "@/lib/images";
+import { AddToCart } from "@/components/cart/AddToCart";
 
 export async function generateMetadata({
   params,
@@ -99,32 +100,25 @@ export default async function ProductDetail({
               <span className="text-lg text-ink-400">{t("currency")}</span>
             </div>
 
-            {product.sizes && product.sizes.length > 0 && (
-              <div className="mb-6">
-                <p className="text-sm font-medium text-ink-700 mb-2">{t("sizes")}</p>
-                <div className="flex flex-wrap gap-2">
-                  {product.sizes.map((s) => (
-                    <span
-                      key={s}
-                      className="h-10 min-w-[2.5rem] px-3 inline-flex items-center justify-center rounded-lg border border-ink-200 bg-white text-sm font-medium text-ink-700"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="flex flex-wrap gap-3 mb-10">
-              <Button variant="primary" size="lg" disabled={!product.in_stock}>
-                {product.in_stock ? t("addToCart") : t("outOfStock")}
-              </Button>
+            <div className="mb-8 space-y-4">
+              <AddToCart
+                product={{
+                  productId: product.id,
+                  slug: product.slug,
+                  title,
+                  price_dzd: product.price_dzd,
+                  image: product.images?.[0] ?? null,
+                }}
+                sizes={product.sizes}
+                disabled={!product.in_stock}
+              />
               <a
                 href="https://wa.me/213000000000"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-block"
               >
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="md">
                   <MessageCircle className="size-4" />
                   WhatsApp
                 </Button>

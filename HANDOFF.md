@@ -4,6 +4,23 @@ Quick reference for shipping updates and giving the site to your client.
 
 ---
 
+## ⚠️ FIRST: Run the new database migration (one time, 2 min)
+
+This update adds a shopping cart, orders, and full admin editing. It needs one new
+database table. **Do this once, before pushing the code:**
+
+1. Open your repo file `supabase/orders.sql` (or open it on GitHub)
+2. Copy the entire contents
+3. Supabase → **SQL Editor** → **New query** → paste → **Run**
+4. You should see "Success." and a new **orders** table appears in Table Editor
+
+This also tightens security: it removes the old "any logged-in user can edit content"
+rule. Admin edits now go through a secure server key. **So you must also confirm
+`SUPABASE_SERVICE_ROLE_KEY` is set in Vercel** (you added it during first setup — it's
+the `sb_secret_...` value). Without it, the admin can't save changes.
+
+---
+
 ## A · Push this update live (2 min)
 
 Your GitHub repo is already connected to Vercel, so **pushing to GitHub auto-deploys**. In the project folder:
@@ -67,21 +84,46 @@ Now only those emails reach `/admin`; everyone else who signs up lands on their 
 | Tourism booking form → saves to DB | ✅ |
 | Contact form → saves to DB | ✅ |
 | Customer signup + login + account page | ✅ |
-| Admin dashboard (counts, products, bookings, messages) | ✅ |
-| **Payment / checkout** | ⏳ **Intentionally not built** |
+| **Shopping cart** (add, qty, remove, persists) | ✅ |
+| **Checkout → saves order to DB** (pay-on-delivery) | ✅ |
+| **Customer order history** in /account | ✅ |
+| **Admin: create / edit / delete products** | ✅ |
+| **Admin: create / edit / delete blog, archive, artisans** | ✅ |
+| **Admin: manage orders / bookings / messages** (status updates) | ✅ |
+| **Admin notification badges** (new orders/bookings/messages) | ✅ |
+| **Online card payment** | ⏳ **Intentionally not built** |
 
-**Why no payment:** real checkout needs a registered business + a payment provider (Stripe internationally, or CIB / Edahabia / SATIM for Algeria). That's a production-phase task with legal/KYC steps. Right now products show a price and an "Add to cart" + WhatsApp-order path, which is enough for client preview and early orders.
+**Why no online payment:** real card payment needs a registered business + a provider
+(SATIM / CIB / Edahabia for Algeria, or Stripe internationally) with legal/KYC steps.
+Instead, checkout works on a **pay-on-delivery** model: the customer fills shipping
+details, the order is saved to the database, the admin sees it instantly (with a "new"
+badge), and the business contacts the customer to confirm. This is exactly how most
+Algerian e-commerce works today and is fully functional for real orders.
+
+**How the shopping flow works now:**
+1. Customer browses Shop → opens a product → picks size → **Add to cart**
+2. Cart icon (top-right) shows count → opens a drawer → **Checkout**
+3. Customer enters name/phone/address → **Place order** → confirmation screen
+4. Order lands in **Admin → Orders** with a "new" badge; admin updates status
+   (new → confirmed → shipped → delivered)
+5. Logged-in customers see their orders under **My account**
+
+**About email/SMS notifications:** the admin is notified *in-app* (dashboard badges +
+Orders list). Automatic email/SMS to the client on each order is a small add-on that
+needs an email service (e.g. Resend) — ask when you want it wired up.
 
 ---
 
-## F · Managing content
+## F · Managing content (now fully in-site)
 
-Use the **Supabase Table Editor** (supabase.com → your project → Table Editor):
-- `products`, `archive_items`, `artisans`, `blog_posts` — add/edit rows
-- Multilingual fields are JSON: `{"ar": "...", "fr": "...", "en": "..."}`
-- For product images: paste an image URL into the `images` array. Unsplash URLs and Supabase Storage URLs both work.
+Log in at `/ar/login`, then use the **admin dashboard** — no Supabase needed for daily work:
 
-Bookings and contact messages arrive in `tourism_bookings` and `contact_submissions`, viewable in the in-site admin too.
+- **Products** → Add new / Edit / Delete, with all three languages, price, sizes, images, stock + featured toggles
+- **Blog / Archive / Artisans** → same Add / Edit / Delete
+- **Orders / Bookings / Messages** → change status from a dropdown; new ones show a red badge on the dashboard
+- For images: paste an image URL (Unsplash, or upload to Supabase Storage and paste that URL). One URL per line for products.
+
+The Supabase Table Editor still works as a backup/bulk-edit tool, but you no longer need it for normal updates.
 
 ---
 

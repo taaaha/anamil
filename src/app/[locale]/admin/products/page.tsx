@@ -1,8 +1,11 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { pickLocale, type Product } from "@/lib/supabase/types";
-import { ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { Plus, Pencil, ExternalLink } from "lucide-react";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { pickLocale, type Product } from "@/lib/supabase/types";
+import { Button } from "@/components/ui/Button";
+import { DeleteButton } from "@/components/admin/DeleteButton";
+import { deleteProduct } from "../actions";
 
 export default async function AdminProducts({
   params,
@@ -14,7 +17,7 @@ export default async function AdminProducts({
   const t = await getTranslations("admin");
   const tShop = await getTranslations("shop");
 
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabaseAdminClient();
   const { data } = await supabase
     .from("products")
     .select("*")
@@ -25,22 +28,22 @@ export default async function AdminProducts({
     <>
       <div className="flex items-center justify-between mb-8 gap-4">
         <h1 className="heading-3">{t("products")}</h1>
-        <p className="text-sm text-ink-400">
-          {locale === "ar"
-            ? "إدارة المنتجات تتم حاليًا عبر لوحة Supabase"
-            : locale === "fr"
-              ? "La gestion des produits se fait via le tableau Supabase"
-              : "Manage products via the Supabase dashboard for now"}
-        </p>
+        <Link href={`/${locale}/admin/products/new`}>
+          <Button variant="primary" size="sm">
+            <Plus className="size-4" />
+            {t("addNew")}
+          </Button>
+        </Link>
       </div>
+
       <div className="surface-card overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-sand-100 text-ink-500 text-xs uppercase tracking-wider">
             <tr>
               <th className="text-start px-5 py-3">{t("products")}</th>
-              <th className="text-start px-5 py-3">{tShop("sortBy")}</th>
+              <th className="text-start px-5 py-3 hidden sm:table-cell">{tShop("filters")}</th>
               <th className="text-start px-5 py-3">{tShop("currency")}</th>
-              <th className="text-start px-5 py-3"></th>
+              <th className="text-end px-5 py-3"></th>
             </tr>
           </thead>
           <tbody>
@@ -48,25 +51,41 @@ export default async function AdminProducts({
               <tr key={p.id} className="border-t border-ink-100">
                 <td className="px-5 py-3 font-medium text-ink-900">
                   {pickLocale(p.title, locale)}
+                  {p.featured && <span className="ms-2 text-xs text-clay-500">★</span>}
+                  {!p.in_stock && (
+                    <span className="ms-2 text-xs text-rose-deep">({tShop("outOfStock")})</span>
+                  )}
                 </td>
-                <td className="px-5 py-3 text-ink-500">{p.category}</td>
+                <td className="px-5 py-3 text-ink-500 hidden sm:table-cell">{p.category}</td>
                 <td className="px-5 py-3 text-clay-600 font-medium">
                   {p.price_dzd.toLocaleString(locale)}
                 </td>
-                <td className="px-5 py-3 text-end">
-                  <Link
-                    href={`/${locale}/shop/${p.slug}`}
-                    className="inline-flex items-center gap-1 text-clay-600 hover:text-clay-700"
-                  >
-                    <ExternalLink className="size-4" />
-                  </Link>
+                <td className="px-5 py-3">
+                  <div className="flex items-center justify-end gap-1">
+                    <Link
+                      href={`/${locale}/shop/${p.slug}`}
+                      target="_blank"
+                      className="p-2 rounded-lg text-ink-400 hover:bg-ink-100"
+                      title="View"
+                    >
+                      <ExternalLink className="size-4" />
+                    </Link>
+                    <Link
+                      href={`/${locale}/admin/products/${p.id}`}
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-clay-600 hover:bg-clay-50 px-2.5 py-1.5 rounded-lg"
+                    >
+                      <Pencil className="size-4" />
+                      {t("edit")}
+                    </Link>
+                    <DeleteButton id={p.id} action={deleteProduct} />
+                  </div>
                 </td>
               </tr>
             ))}
             {products.length === 0 && (
               <tr>
-                <td colSpan={4} className="px-5 py-10 text-center text-ink-400">
-                  —
+                <td colSpan={4} className="px-5 py-12 text-center text-ink-400">
+                  {t("addNew")} →
                 </td>
               </tr>
             )}

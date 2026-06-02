@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   LayoutDashboard,
   ShoppingBag,
+  Package,
   Archive,
   FileText,
   CalendarCheck,
@@ -17,13 +18,17 @@ import { signOut } from "../login/actions";
 
 const navItems = [
   { key: "dashboard", path: "", icon: LayoutDashboard },
+  { key: "orders", path: "orders", icon: Package },
   { key: "products", path: "products", icon: ShoppingBag },
-  { key: "archive", path: "archive", icon: Archive },
-  { key: "blog", path: "blog", icon: FileText },
   { key: "bookings", path: "bookings", icon: CalendarCheck },
   { key: "messages", path: "messages", icon: Mail },
+  { key: "blog", path: "blog", icon: FileText },
+  { key: "archive", path: "archive", icon: Archive },
   { key: "artisans", path: "artisans", icon: Users },
 ] as const;
+
+// Admin is auth-gated and reads live data — never prerender it.
+export const dynamic = "force-dynamic";
 
 export default async function AdminLayout({
   children,

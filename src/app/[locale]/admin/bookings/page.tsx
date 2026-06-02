@@ -1,6 +1,10 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import type { TourismBooking } from "@/lib/supabase/types";
+import { StatusSelect } from "@/components/admin/StatusSelect";
+import { updateBookingStatus } from "../actions";
+
+const STATUSES = ["new", "confirmed", "cancelled"] as const;
 
 export default async function AdminBookings({
   params,
@@ -11,72 +15,47 @@ export default async function AdminBookings({
   setRequestLocale(locale);
   const t = await getTranslations("admin");
   const tT = await getTranslations("tourism.experiences");
+  const tStatus = await getTranslations("orders.status");
 
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabaseAdminClient();
   const { data } = await supabase
     .from("tourism_bookings")
     .select("*")
     .order("created_at", { ascending: false });
   const rows = (data as TourismBooking[]) ?? [];
 
-  const statusColor: Record<string, string> = {
-    new: "bg-clay-100 text-clay-700",
-    confirmed: "bg-green-100 text-green-700",
-    cancelled: "bg-ink-100 text-ink-500",
+  const statusOptions = STATUSES.map((s) => ({ value: s, label: tStatus(s) }));
+  const expLabel = (e: string) => {
+    try {
+      return tT(e as never);
+    } catch {
+      return e;
+    }
   };
 
   return (
     <>
       <h1 className="heading-3 mb-8">{t("bookings")}</h1>
-      <div className="surface-card overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-sand-100 text-ink-500 text-xs uppercase tracking-wider">
-            <tr>
-              <th className="text-start px-5 py-3">Date</th>
-              <th className="text-start px-5 py-3">Name</th>
-              <th className="text-start px-5 py-3">Experience</th>
-              <th className="text-start px-5 py-3">Party</th>
-              <th className="text-start px-5 py-3">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((b) => (
-              <tr key={b.id} className="border-t border-ink-100">
-                <td className="px-5 py-3 text-ink-700">
-                  {new Date(b.preferred_date).toLocaleDateString(locale)}
-                </td>
-                <td className="px-5 py-3 text-ink-900">
-                  <div className="font-medium">{b.full_name}</div>
-                  <div className="text-xs text-ink-400">{b.email}</div>
-                </td>
-                <td className="px-5 py-3 text-ink-700">
-                  {(() => {
-                    try {
-                      return tT(b.experience as never);
-                    } catch {
-                      return b.experience;
-                    }
-                  })()}
-                </td>
-                <td className="px-5 py-3 text-ink-700">{b.party_size}</td>
-                <td className="px-5 py-3">
-                  <span
-                    className={`inline-block text-xs font-medium px-2 py-1 rounded-full ${statusColor[b.status] ?? "bg-ink-100 text-ink-500"}`}
-                  >
-                    {b.status}
-                  </span>
-                </td>
-              </tr>
-            ))}
-            {rows.length === 0 && (
-              <tr>
-                <td colSpan={5} className="px-5 py-10 text-center text-ink-400">
-                  —
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div className="space-y-3">
+        {rows.map((b) => (
+          <div key={b.id} className="surface-card p-5 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="font-semibold text-ink-900">{b.full_name}</p>
+              <p className="text-sm text-ink-400" dir="ltr">
+                {b.email} · {b.phone}
+              </p>
+              <p className="text-sm text-ink-500 mt-1">
+                {expLabel(b.experience)} ·{" "}
+                {new Date(b.preferred_date).toLocaleDateString(locale)} · {b.party_size}
+              </p>
+              {b.notes && <p className="text-sm text-ink-400 italic mt-1">“{b.notes}”</p>}
+            </div>
+            <StatusSelect id={b.id} value={b.status} options={statusOptions} action={updateBookingStatus} />
+          </div>
+        ))}
+        {rows.length === 0 && (
+          <div className="surface-card p-12 text-center text-ink-400">{t("noData")}</div>
+        )}
       </div>
     </>
   );

@@ -81,6 +81,30 @@ export interface ContactSubmission {
   created_at: string;
 }
 
+export interface OrderItem {
+  product_id: string;
+  slug: string;
+  title: string;
+  price_dzd: number;
+  qty: number;
+  size: string | null;
+}
+
+export interface Order {
+  id: string;
+  customer_name: string;
+  customer_email: string;
+  customer_phone: string | null;
+  shipping_address: string | null;
+  city: string | null;
+  country: string | null;
+  items: OrderItem[];
+  total_dzd: number;
+  status: "new" | "confirmed" | "shipped" | "delivered" | "cancelled";
+  notes: string | null;
+  created_at: string;
+}
+
 export function pickLocale(
   text: LocalizedText | null | undefined,
   locale: string,

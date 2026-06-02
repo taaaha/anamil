@@ -49,7 +49,9 @@ export function SiteFooter() {
       <div className="container-page grid gap-12 md:grid-cols-2 lg:grid-cols-4 pt-16">
 
         <div className="space-y-5 lg:col-span-1">
-          <Logo variant="footer" />
+          <div className="inline-flex bg-white rounded-2xl px-4 py-3 shadow-sm">
+            <Logo variant="footer" />
+          </div>
           <p className="text-sm text-sand-200/80 leading-relaxed max-w-xs">
             {t("tagline")}
           </p>
