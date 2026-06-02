@@ -64,6 +64,7 @@ export function SiteHeader({ auth }: { auth: Auth }) {
   }
 
   return (
+    <>
     <header
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
@@ -137,11 +138,13 @@ export function SiteHeader({ auth }: { auth: Auth }) {
           </button>
         </div>
       </div>
+    </header>
 
-      {/* ─── Mobile full-screen drawer ─────────────────────── */}
+      {/* ─── Mobile drawer — sibling of <header> so the header's
+           backdrop-blur doesn't trap its fixed positioning ─── */}
       <div
         className={cn(
-          "lg:hidden fixed inset-0 z-50 transition-opacity duration-300",
+          "lg:hidden fixed inset-0 z-[60] transition-opacity duration-300",
           open ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
       >
@@ -260,7 +263,7 @@ export function SiteHeader({ auth }: { auth: Auth }) {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
 

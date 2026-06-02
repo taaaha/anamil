@@ -17,7 +17,7 @@ import {
   BerberRule,
 } from "@/components/patterns/Berber";
 import { listProducts } from "@/lib/data";
-import { heroImages, archiveImages, productImages, unsplash } from "@/lib/images";
+import { heroImages, productImages, unsplash } from "@/lib/images";
 
 const pillars = [
   { key: "archive", icon: Archive, href: "archive" },
@@ -98,7 +98,7 @@ export default async function HomePage({
       </section>
 
       {/* ═══ CURATED INDEX — numbered pillar list ════════════ */}
-      <section className="bg-sand-50 texture-weave">
+      <section className="bg-sand-50">
         <div className="container-page py-16 sm:py-24">
           <div className="flex items-end justify-between gap-6 mb-10">
             <div className="flex items-center gap-4">
@@ -229,7 +229,7 @@ export default async function HomePage({
           <div className="relative aspect-[4/3] lg:aspect-auto lg:col-span-7 lg:min-h-[480px] order-2 lg:order-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={unsplash(archiveImages.canyon, 1800)}
+              src={unsplash(productImages.textile_stack, 1800)}
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
