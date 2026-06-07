@@ -1,72 +1,131 @@
--- Anamil — add 3 new products (Chaoui collection)
+-- Anamil — Chaoui collection: real product photos + new products + archive
 -- Run ONCE in Supabase → SQL Editor → New query → paste → Run.
--- Safe to re-run: existing slugs are skipped (on conflict do nothing).
+-- Safe to re-run: image updates are idempotent; new rows skip on conflict.
 --
--- Images currently use the site's existing stock photos as placeholders.
--- To swap in the real product photos: Admin → Products → Edit → paste the
--- real image URLs (one per line), or replace the array[...] values below.
+-- Images are served from the deployed site at /products/*.webp
+-- (committed under public/products/). No Supabase Storage needed.
+--
+-- ⚠️ PRICES for the 6 NEW products are PROPOSED ESTIMATES — review/adjust them
+-- to your real prices before relying on them (here, or in Admin → Products).
 
+-- ─── 1) Real photos for the 3 products already added ───────────────
+update public.products set images = array['/products/10.webp'] where slug = 'khimar-chaoui-embroidered';
+update public.products set images = array['/products/9.webp']  where slug = 'hzam-chaoui-multifil';
+update public.products set images = array['/products/7.webp']  where slug = 'libas-chaoui-complet';
+
+-- ─── 2) Six new products ───────────────────────────────────────────
 insert into public.products
   (slug, category, title, short_description, story, symbolism, occasion, artisan_name, price_dzd, sizes, images, in_stock, featured)
 values
-  -- 1) خمار شاوي مطرز — 2 500 دج
   (
-    'khimar-chaoui-embroidered',
+    'haqiba-chaoui-embroidered',
     'accessories',
-    '{"ar":"خمار شاوي مطرز","fr":"Khimar chaoui brodé","en":"Embroidered Chaoui Khimar"}',
-    '{"ar":"خمار شاوي تقليدي مطرز بخيوط ملونة على قماش فاخر، يجمع بين الأناقة والتراث الأصيل.","fr":"Khimar chaoui traditionnel brodé de fils colorés sur un tissu raffiné, alliant élégance et patrimoine authentique.","en":"Traditional Chaoui khimar embroidered with colored threads on premium fabric, blending elegance with authentic heritage."}',
-    '{"ar":"تصميم خفيف ومريح يناسب الاستخدام اليومي والمناسبات. قماش فاخر مطرز يدويًا بخيوط ملونة عالية الجودة، بأبعاد 100 × 100 سم تقريبًا. يُغسل يدويًا بالماء البارد.","fr":"Un design léger et confortable adapté à l''usage quotidien comme aux grandes occasions. Tissu raffiné brodé à la main de fils colorés de haute qualité, dimensions d''environ 100 × 100 cm. Lavage à la main à l''eau froide.","en":"A light, comfortable design suited to both daily wear and special occasions. Premium fabric hand-embroidered with high-quality colored threads, about 100 × 100 cm. Hand-wash in cold water."}',
-    '{"ar":"تطريز شاوي أصيل بخيوط زاهية يعكس التراث الأوراسي.","fr":"Une broderie chaoui authentique aux fils éclatants qui reflète le patrimoine des Aurès.","en":"Authentic Chaoui embroidery in vivid threads that reflects the heritage of the Aurès."}',
+    '{"ar":"حقيبة شاوية مطرزة","fr":"Sac chaoui brodé","en":"Embroidered Chaoui Bag"}',
+    '{"ar":"حقيبة يدوية مطرزة بنقوش أمازيغية وخرز فضي وشرّابات ملونة، متوفرة بعدة تصاميم.","fr":"Sac fait main brodé de motifs amazighs, perles argentées et pompons colorés, disponible en plusieurs modèles.","en":"Handmade bag embroidered with Amazigh motifs, silver beads and colorful tassels, available in several styles."}',
+    '{"ar":"تُطرّز كل حقيبة يدويًا على قماش متين بنقوش هندسية تستلهم من الزرابي الأوراسية، مع زخارف فضية وشرّابات.","fr":"Chaque sac est brodé à la main sur un tissu résistant avec des motifs géométriques inspirés des tapis des Aurès, ornés de pièces argentées et de pompons.","en":"Each bag is hand-embroidered on durable fabric with geometric motifs inspired by Aurès rugs, finished with silver ornaments and tassels."}',
+    '{"ar":"النقوش الهندسية رموز حماية وانتماء في الثقافة الأمازيغية.","fr":"Les motifs géométriques sont des symboles de protection et d''appartenance dans la culture amazighe.","en":"The geometric motifs are symbols of protection and belonging in Amazigh culture."}',
+    '{"ar":"الاستخدام اليومي والمناسبات","fr":"Usage quotidien et occasions","en":"Daily use and occasions"}',
+    null,
+    4500,
+    null,
+    array['/products/1.webp'],
+    true,
+    true
+  ),
+  (
+    'qilada-chaoui-silver',
+    'accessories',
+    '{"ar":"قلادة شاوية فضية","fr":"Collier chaoui en argent","en":"Silver Chaoui Necklace"}',
+    '{"ar":"قلادة بحجر أحمر ونقوش فضية وخرز ملوّن وقطع نقدية تقليدية، مستوحاة من الحلي الأوراسية.","fr":"Collier à pierre rouge, motifs argentés, perles colorées et pièces traditionnelles, inspiré des bijoux des Aurès.","en":"Necklace with a red stone, silver motifs, colored beads and traditional coins, inspired by Aurès jewelry."}',
+    '{"ar":"تُجمع القلادة يدويًا من خرز ملوّن وقطع فضية معلّقة حول حجر مركزي أحمر يتدلّى منه زخارف.","fr":"Le collier est assemblé à la main à partir de perles colorées et de pièces en argent autour d''une pierre rouge centrale ornée de pendeloques.","en":"The necklace is hand-assembled from colored beads and hanging silver pieces around a central red stone with dangling ornaments."}',
+    '{"ar":"الفضة والحجر الأحمر رمزا الحماية والحياة في التقليد الأمازيغي.","fr":"L''argent et la pierre rouge symbolisent la protection et la vie dans la tradition amazighe.","en":"Silver and the red stone symbolize protection and life in Amazigh tradition."}',
+    '{"ar":"المناسبات والأعراس وهدية رمزية","fr":"Occasions, mariages et cadeau symbolique","en":"Occasions, weddings and a symbolic gift"}',
+    null,
+    4200,
+    null,
+    array['/products/2.webp'],
+    true,
+    false
+  ),
+  (
+    'libas-chaoui-noir',
+    'heritage',
+    '{"ar":"لباس شاوي أسود مطرز","fr":"Tenue chaoui noire brodée","en":"Black Embroidered Chaoui Outfit"}',
+    '{"ar":"زيّ شاوي أسود كامل (خمار وفستان) مطرز بالرمز الأمازيغي وحواف بألوان التراث وشرّابات.","fr":"Tenue chaoui noire complète (khimar et robe) brodée du symbole amazigh, avec bordures aux couleurs du patrimoine et pompons.","en":"Complete black Chaoui set (khimar and dress) embroidered with the Amazigh symbol, with heritage-colored trims and tassels."}',
+    '{"ar":"يجمع هذا الزيّ بين الخمار والفستان، مطرّزًا بالرمز الأمازيغي (آزا) وزخارف نجمية، مع حواف بألوان الأحمر والأصفر والأخضر وشرّابات يدوية.","fr":"Cette tenue réunit le khimar et la robe, brodée du symbole amazigh (Aza) et de motifs étoilés, avec des bordures rouge, jaune et vert et des pompons faits main.","en":"This set pairs the khimar with the dress, embroidered with the Amazigh symbol (Aza) and star motifs, with red, yellow and green trims and handmade tassels."}',
+    '{"ar":"الرمز الأمازيغي (آزا) يرمز للحرية والإنسان الحر.","fr":"Le symbole amazigh (Aza) représente la liberté et l''homme libre.","en":"The Amazigh symbol (Aza) represents freedom and the free person."}',
+    '{"ar":"الأعراس والمناسبات الكبرى","fr":"Mariages et grandes occasions","en":"Weddings and major celebrations"}',
+    null,
+    16000,
+    array['S','M','L','XL'],
+    array['/products/3.webp'],
+    true,
+    true
+  ),
+  (
+    'khimar-chaoui-noir',
+    'accessories',
+    '{"ar":"خمار شاوي أسود مطرز","fr":"Khimar chaoui noir brodé","en":"Black Embroidered Chaoui Khimar"}',
+    '{"ar":"خمار أسود مطرز بخيوط برتقالية وحمراء بنقوش هندسية دقيقة، مع شرّابات على الأطراف.","fr":"Khimar noir brodé de fils orange et rouge aux motifs géométriques fins, avec des pompons sur les bords.","en":"Black khimar embroidered with orange and red threads in fine geometric motifs, with tassels along the edges."}',
+    '{"ar":"خمار خفيف من قماش أسود مطرّز يدويًا بنقوش متقاطعة دقيقة، يُنهى بشرّابات على الحواف. يُغسل يدويًا بالماء البارد.","fr":"Khimar léger en tissu noir brodé à la main de motifs croisés fins, fini de pompons sur les bords. Lavage à la main à l''eau froide.","en":"Light black-fabric khimar hand-embroidered with fine cross motifs, finished with tassels along the edges. Hand-wash in cold water."}',
+    '{"ar":"النقوش المتقاطعة تستلهم من فن التطريز الشاوي الأصيل.","fr":"Les motifs croisés s''inspirent de l''art de la broderie chaoui authentique.","en":"The cross motifs draw on authentic Chaoui embroidery art."}',
     '{"ar":"الاستخدام اليومي والمناسبات","fr":"Usage quotidien et occasions","en":"Daily wear and occasions"}',
     null,
     2500,
     null,
-    array[
-      'https://images.unsplash.com/photo-1771409046903-1ffb0f45cda9',
-      'https://images.unsplash.com/photo-1680034976848-d9fe95466aba',
-      'https://images.unsplash.com/photo-1569909115134-a0426936c879'
-    ],
+    array['/products/4.webp'],
     true,
-    true
+    false
   ),
-  -- 2) حزام شاوي متعدد الخيوط — 2 800 دج
   (
-    'hzam-chaoui-multifil',
-    'accessories',
-    '{"ar":"حزام شاوي متعدد الخيوط","fr":"Ceinture chaoui multi-fils","en":"Multi-thread Chaoui Belt"}',
-    '{"ar":"حزام تقليدي شاوي مصنوع يدويًا من خيوط ملونة متداخلة، يزيّن الملابس التقليدية النسائية ويضيف لمسة جمالية تراثية أصيلة.","fr":"Ceinture chaoui traditionnelle faite main à partir de fils colorés entrelacés, qui orne les tenues féminines traditionnelles et ajoute une touche esthétique patrimoniale authentique.","en":"Traditional Chaoui belt handmade from interwoven colored threads, adorning traditional women''s attire with an authentic heritage touch."}',
-    '{"ar":"مشغول يدويًا بإتقان من خيوط قطنية متعددة الألوان، بطول 150 سم قابل للتعديل ليلائم جميع المقاسات. يُغسل يدويًا بماء بارد.","fr":"Confectionnée à la main avec soin à partir de fils de coton multicolores, longueur 150 cm ajustable pour convenir à toutes les tailles. Lavage à la main à l''eau froide.","en":"Carefully handmade from multicolored cotton threads, 150 cm adjustable length to fit all sizes. Hand-wash in cold water."}',
-    '{"ar":"مزيج متناغم من الألوان التقليدية المستوحاة من التراث الشاوي.","fr":"Un mélange harmonieux de couleurs traditionnelles inspirées du patrimoine chaoui.","en":"A harmonious blend of traditional colors inspired by Chaoui heritage."}',
-    '{"ar":"يكمّل الزيّ التقليدي في المناسبات","fr":"Complète la tenue traditionnelle lors des occasions","en":"Completes traditional attire for occasions"}',
-    null,
-    2800,
-    null,
-    array[
-      'https://images.unsplash.com/photo-1680034976848-d9fe95466aba',
-      'https://images.unsplash.com/photo-1569909115134-a0426936c879',
-      'https://images.unsplash.com/photo-1771409046903-1ffb0f45cda9'
-    ],
-    true,
-    true
-  ),
-  -- 3) لباس تقليدي شاوي كامل — 18 500 دج
-  (
-    'libas-chaoui-complet',
+    'fustan-chaoui-embroidered',
     'heritage',
-    '{"ar":"لباس تقليدي شاوي كامل","fr":"Tenue chaoui traditionnelle complète","en":"Complete Traditional Chaoui Outfit"}',
-    '{"ar":"زيّ تقليدي شاوي أصيل يعكس جمال التراث الجزائري وخصوصية الثقافة الشاوية، يجمع بين الألوان الزاهية والتطريز اليدوي الفاخر والإكسسوارات التقليدية.","fr":"Tenue chaoui traditionnelle authentique reflétant la beauté du patrimoine algérien et la singularité de la culture chaoui, alliant couleurs vives, broderie main raffinée et accessoires traditionnels.","en":"Authentic traditional Chaoui outfit reflecting the beauty of Algerian heritage and the distinctiveness of Chaoui culture, combining vivid colors, fine hand embroidery and traditional accessories."}',
-    '{"ar":"تصميم متكامل يجمع بين الصدرة والتطريز التقليدي، والحزام المزخرف، والأكمام الواسعة المطرزة بحواف ملونة، لتنسيق مثالي بين القطع المختلفة في جميع المناسبات. يُغسل يدويًا بالماء البارد.","fr":"Un ensemble complet réunissant le plastron et la broderie traditionnelle, la ceinture ornée et les manches amples brodées aux bords colorés, pour une harmonie parfaite en toutes occasions. Lavage à la main à l''eau froide.","en":"A complete ensemble bringing together the embroidered bodice, the ornate belt, and wide sleeves with colored trims, for perfect harmony across all occasions. Hand-wash in cold water."}',
-    '{"ar":"تطريز يدوي فاخر مع إكسسوارات من الفضة التقليدية يعكس أصالة الزيّ الشاوي.","fr":"Broderie main raffinée et accessoires en argent traditionnel reflétant l''authenticité de la tenue chaoui.","en":"Fine hand embroidery with traditional silver accessories reflecting the authenticity of Chaoui dress."}',
-    '{"ar":"الأعراس والمناسبات الكبرى","fr":"Mariages et grandes occasions","en":"Weddings and major celebrations"}',
+    '{"ar":"فستان شاوي مطرز","fr":"Robe chaoui brodée","en":"Embroidered Chaoui Dress"}',
+    '{"ar":"فستان طويل أسود مطرز بنقوش حمراء وبرتقالية على الصدر والأكمام والأطراف، مع حزام مطرز.","fr":"Robe longue noire brodée de motifs rouge et orange au plastron, aux manches et aux ourlets, avec une ceinture brodée.","en":"Long black dress embroidered with red and orange motifs on the bodice, sleeves and hems, with an embroidered belt."}',
+    '{"ar":"فستان واسع بقصّة تقليدية، مطرّز يدويًا بنقوش هندسية على الصدر والأكمام والذيل، مع حزام مطرّز يبرز الخصر.","fr":"Robe ample à la coupe traditionnelle, brodée à la main de motifs géométriques au plastron, aux manches et au bas, avec une ceinture brodée qui souligne la taille.","en":"A flowing dress with a traditional cut, hand-embroidered with geometric motifs on the bodice, sleeves and hem, with an embroidered belt that defines the waist."}',
+    '{"ar":"النقوش الهندسية الحمراء ترمز للحياة والخصوبة في التراث الأوراسي.","fr":"Les motifs géométriques rouges symbolisent la vie et la fertilité dans le patrimoine des Aurès.","en":"The red geometric motifs symbolize life and fertility in Aurès heritage."}',
+    '{"ar":"المناسبات والاحتفالات","fr":"Occasions et célébrations","en":"Occasions and celebrations"}',
     null,
-    18500,
+    12000,
     array['S','M','L','XL'],
-    array[
-      'https://images.unsplash.com/photo-1768913652736-40fd397ec20d',
-      'https://images.unsplash.com/photo-1775836069889-7acb6490c6de',
-      'https://images.unsplash.com/photo-1672837350483-1131c1c31422'
-    ],
+    array['/products/5.webp'],
     true,
-    true
+    false
+  ),
+  (
+    'bernous-chaoui-embroidered',
+    'heritage',
+    '{"ar":"برنوس شاوي مطرز","fr":"Burnous chaoui brodé","en":"Embroidered Chaoui Burnous"}',
+    '{"ar":"برنوس رمادي بقبّعة، مطرز بنقوش معيّنية ملوّنة وحواف بألوان التراث وشرّابات.","fr":"Burnous gris à capuche, brodé de motifs en losange colorés, avec bordures aux couleurs du patrimoine et pompons.","en":"Grey hooded burnous, embroidered with colorful diamond motifs, with heritage-colored trims and tassels."}',
+    '{"ar":"برنوس واسع من قماش رمادي بقبّعة، مزيّن بنقوش معيّنية ملوّنة على الظهر والحواف، مع شرّابات يدوية على الأطراف.","fr":"Burnous ample en tissu gris à capuche, orné de motifs en losange colorés au dos et sur les bords, avec des pompons faits main.","en":"A wide grey-fabric hooded burnous, adorned with colorful diamond motifs on the back and edges, with handmade tassels along the trims."}',
+    '{"ar":"المعيّن رمز للخصوبة والحماية في الزخرفة الأمازيغية.","fr":"Le losange est un symbole de fertilité et de protection dans l''ornement amazigh.","en":"The diamond is a symbol of fertility and protection in Amazigh ornamentation."}',
+    '{"ar":"المناسبات والطقس البارد","fr":"Occasions et temps frais","en":"Occasions and cooler weather"}',
+    null,
+    14000,
+    null,
+    array['/products/6.webp'],
+    true,
+    false
+  )
+on conflict (slug) do nothing;
+
+-- ─── 3) Two heritage reference photos → Archive ────────────────────
+insert into public.archive_items (slug, kind, title, description, year, media_url)
+values
+  (
+    'photo-aures-celebration',
+    'photo',
+    '{"ar":"احتفال تقليدي في الأوراس","fr":"Célébration traditionnelle dans les Aurès","en":"Traditional celebration in the Aurès"}',
+    '{"ar":"نساء بالزيّ الشاوي التقليدي يؤدّين رقصة احتفالية بين الجبال، مشهد يجسّد حيوية التراث الأوراسي.","fr":"Des femmes en tenue chaoui traditionnelle exécutent une danse de fête au milieu des montagnes, une scène qui incarne la vitalité du patrimoine des Aurès.","en":"Women in traditional Chaoui dress perform a festive dance amid the mountains, a scene that embodies the vitality of Aurès heritage."}',
+    null,
+    '/products/11.webp'
+  ),
+  (
+    'photo-aures-women-costume',
+    'photo',
+    '{"ar":"نساء أوراسيات بالزيّ التقليدي","fr":"Femmes aurassiennes en costume traditionnel","en":"Aurès women in traditional costume"}',
+    '{"ar":"صورة توثيقية لامرأة وفتاة بالزيّ الأوراسي الكامل، بالحلي الفضية والعمامة الملوّنة والمنسوجات التقليدية.","fr":"Photographie documentaire d''une femme et d''une fille en costume aurassien complet, avec bijoux d''argent, turban coloré et textiles traditionnels.","en":"A documentary photograph of a woman and a girl in full Aurès costume, with silver jewelry, a colorful turban and traditional textiles."}',
+    null,
+    '/products/12.webp'
   )
 on conflict (slug) do nothing;

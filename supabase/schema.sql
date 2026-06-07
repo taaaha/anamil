@@ -189,7 +189,7 @@ values
     null,
     2500,
     null,
-    array['https://images.unsplash.com/photo-1771409046903-1ffb0f45cda9','https://images.unsplash.com/photo-1680034976848-d9fe95466aba','https://images.unsplash.com/photo-1569909115134-a0426936c879'],
+    array['/products/10.webp'],
     true
   ),
   (
@@ -203,7 +203,7 @@ values
     null,
     2800,
     null,
-    array['https://images.unsplash.com/photo-1680034976848-d9fe95466aba','https://images.unsplash.com/photo-1569909115134-a0426936c879','https://images.unsplash.com/photo-1771409046903-1ffb0f45cda9'],
+    array['/products/9.webp'],
     true
   ),
   (
@@ -217,10 +217,14 @@ values
     null,
     18500,
     array['S','M','L','XL'],
-    array['https://images.unsplash.com/photo-1768913652736-40fd397ec20d','https://images.unsplash.com/photo-1775836069889-7acb6490c6de','https://images.unsplash.com/photo-1672837350483-1131c1c31422'],
+    array['/products/7.webp'],
     true
   )
 on conflict (slug) do nothing;
+
+-- Note: 6 additional products + 2 archive photos (the rest of the Chaoui
+-- collection) live in supabase/add-products.sql so they can be applied to an
+-- existing database too. Run that file after this one on a fresh install.
 
 insert into public.archive_items (slug, kind, title, description, year)
 values
